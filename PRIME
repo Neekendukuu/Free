@@ -1,0 +1,47 @@
+A) Session Management in JSP
+1. Creating a Session (login.jsp)
+jsp
+Copy code
+<%
+    String username = request.getParameter("username"); // Get username
+    HttpSession session = request.getSession();         // Create a session
+    session.setAttribute("user", username);            // Save username in session
+%>
+<html>
+<body>
+    <h1>Welcome, <%= username %>!</h1>
+    <a href="welcome.jsp">Go to Welcome Page</a>
+</body>
+</html>
+2. Accessing Session Data (welcome.jsp)
+jsp
+Copy code
+<%
+    HttpSession session = request.getSession(false); // Get current session
+    String username = (String) session.getAttribute("user"); // Retrieve username
+
+    if (username == null) { // Check if session exists
+        response.sendRedirect("login.jsp"); // Redirect to login
+    }
+%>
+<html>
+<body>
+    <h1>Welcome back, <%= username %>!</h1>
+    <a href="logout.jsp">Logout</a>
+</body>
+</html>
+3. Invalidating the Session (logout.jsp)
+jsp
+Copy code
+<%
+    HttpSession session = request.getSession(false); // Get current session
+    if (session != null) {
+        session.invalidate(); // End the session
+    }
+%>
+<html>
+<body>
+    <h1>You are logged out!</h1>
+    <a href="login.jsp">Login again</a>
+</body>
+</html>
