@@ -1,21 +1,29 @@
-#include <stdio.h>
+B) Reading Data from Forms Using PHP
+1. HTML Form (form.html)
+html
+Copy code
+<!DOCTYPE html>
+<html>
+<body>
+    <form method="POST" action="process.php">
+        Name: <input type="text" name="name"><br>
+        Email: <input type="email" name="email"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+2. Processing Form Data (process.php)
+php
+Copy code
+<?php
+// Get form data
+$name = $_POST['name'];
+$email = $_POST['email'];
 
-int main() {
-    double n1, n2, n3;
-    printf("Enter three numbers: ");
-    scanf("%lf %lf %lf", &n1, &n2, &n3);
-
-    if (n1 >= n2) {
-        if (n1 >= n3)
-            printf("%.2lf is the largest number.", n1);
-        else
-            printf("%.2lf is the largest number.", n3);
-    } else {
-        if (n2 >= n3)
-            printf("%.2lf is the largest number.", n2);
-        else
-            printf("%.2lf is the largest number.", n3);
-    }
-
-    return 0;
-}
+// Display form data
+echo "Name: " . $name . "<br>";
+echo "Email: " . $email;
+?>
+Explanation
+JSP: Uses HttpSession for managing sessions (creating, accessing, and invalidating).
+PHP: Reads form input using $_POST and outputs the data directly.
