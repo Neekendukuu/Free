@@ -1,0 +1,142 @@
+<?xml version="1.0" ?> 
+ 
+<userlist> 
+ 
+    <user> 
+        <userid>101</userid> 
+        <username>Anusha</username> 
+        <address>DSNR</address> 
+        <phone>8801550102</phone> 
+        <email>anusha@gmail.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>102</userid> 
+        <username>D Divakar</username> 
+        <address>Ameerpet</address> 
+        <phone>988888888</phone> 
+        <email>D Divakar@gmail.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>103</userid> 
+        <username>Rajinth</username> 
+        <address>SR Nagar</address> 
+        <phone>98666666666</phone> 
+        <email>Rajinth@gmail.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>104</userid> 
+        <username>M vijaya</username> 
+        <address>DESHMUKHI</address> 
+       <phone>9835994445</phone> 
+       <email>mvijaya@yahoo.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>105</userid> 
+        <username>Kusuma</username> 
+        <address>KOTI</address> 
+        <phone>968877555</phone> 
+        <email>Kusuma@yahoo.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>106</userid> 
+        <username>P. Kalpana</username> 
+        <address>KOTI</address> 
+         <phone>968895554</phone> 
+        <email>P. Kalpana@yahoo.com</email> 
+        
+    </user> 
+ 
+    <user> 
+        <userid>107</userid> 
+        <username>Anitha</username> 
+        <address>KPHB</address> 
+        <phone>968888554</phone> 
+        <email>Anitha@yahoo.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>108</userid> 
+        <username>M Ramesh</username> 
+        <address>IBP</address> 
+        <phone>968878554</phone> 
+        <email>M Ramesh@yahoo.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>109</userid> 
+        <username>Raswitha</username> 
+        <address>DSNGR</address> 
+          <phone>968899554</phone> 
+        <email>Raswitha@yahoo.com</email> 
+    </user> 
+ 
+    <user> 
+        <userid>110</userid> 
+        <username>A Prasanna</username> 
+        <address>KPHB</address> 
+        <phone>9088008554</phone> 
+        <email>A Prasanna@yahoo.com</email> 
+    </user> 
+ 
+</userlist> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+import java.io.File;  
+import javax.xml.parsers.*;  
+import org.w3c.dom.*;  
+import java.util.Scanner;  
+public class UserDom  
+{  
+public static void main(String args[]) throws Exception  
+{  
+DocumentBuilderFactory fac=DocumentBuilderFactory.newInstance();  
+DocumentBuilder b=fac.newDocumentBuilder();  
+Document doc=b.parse(new File("user.xml"));  
+doc.getDocumentElement().normalize();  
+Element root=doc.getDocumentElement();  
+Scanner in=new Scanner(System.in);  
+System.out.println("Enter User ID:");  
+int n=in.nextInt();  
+int flag=0;  
+NodeList nl=doc.getElementsByTagName("user");  
+for(int i=0;i<nl.getLength();i++)  
+{  
+Node node=nl.item(i);  
+if(node.getNodeType()==Node.ELEMENT_NODE)  
+{  
+Element e=(Element)node;  
+int  
+x=Integer.parseInt(e.getElementsByTagName("userid").item(0).getTextContent());  
+if(x==n)  
+{  
+System.out.println(root.getNodeName());  
+System.out.println("--------------------------------");  
+System.out.println("userid:"+e.getElementsByTagName("userid").item(0).getTextContent());  
+System.out.println("username:"+e.getElementsByTagName("username").item(0).getTextContent(
+ ));  
+System.out.println("address:"+e.getElementsByTagName("address").item(0).getTextContent());  
+System.out.println("phone:"+e.getElementsByTagName("phone").item(0).getTextContent());  
+System.out.println("email:"+e.getElementsByTagName("email").item(0).getTextContent());  
+flag=1;  
+break;  
+}  
+else  
+{  
+flag=0;  
+}  
+}  
+}  
+if(flag==0)  
+System.out.println("User not available");  
+}  
+}
