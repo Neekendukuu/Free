@@ -12,7 +12,7 @@ Sfile=$_POST['file'].'.'.$_POST['ext'];
 
 $data = $_POST['data'];
 
-if (file_exists($file)) (
+if (file_exists($file)) {
 
 echo "<font color='red'>File already exists</font>";
 
