@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form Validation</title>
+    <script>
+        function validateForm() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (!name) {
+                alert("Name is required");
+                return false;
+            }
+
+            if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+                alert("Invalid email");
+                return false;
+            }
+
+            if (!password) {
+                alert("Password is required");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+body>
+
+<h2>Sign Up Form</h2>
+
+<form onsubmit="return validateForm()">
+
+<label>Name:</label><br>
+
+<input type="text" id="name" name="name"><br><br>
+
+<label>Email:</label><br>
+
+<input type="text" id="email" name="email"><br><br>
+
+<label>Password:</label><br> 
+
+<input type="password" id="password" name="password"><br><br>
+
+<label>Confirm Password:</label><br>
+
+<input type="password" id="confirm Password" name="confirm Password"><br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</body>
+
+</html>
