@@ -1,47 +1,29 @@
-A) Session Management in JSP
-1. Creating a Session (login.jsp)
-jsp
-Copy code
-<%
-    String username = request.getParameter("username"); // Get username
-    HttpSession session = request.getSession();         // Create a session
-    session.setAttribute("user", username);            // Save username in session
-%>
-<html>
-<body>
-    <h1>Welcome, <%= username %>!</h1>
-    <a href="welcome.jsp">Go to Welcome Page</a>
-</body>
-</html>
-2. Accessing Session Data (welcome.jsp)
-jsp
-Copy code
-<%
-    HttpSession session = request.getSession(false); // Get current session
-    String username = (String) session.getAttribute("user"); // Retrieve username
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 
-    if (username == null) { // Check if session exists
-        response.sendRedirect("login.jsp"); // Redirect to login
-    }
-%>
-<html>
-<body>
-    <h1>Welcome back, <%= username %>!</h1>
-    <a href="logout.jsp">Logout</a>
-</body>
-</html>
-3. Invalidating the Session (logout.jsp)
-jsp
-Copy code
-<%
-    HttpSession session = request.getSession(false); // Get current session
-    if (session != null) {
-        session.invalidate(); // End the session
-    }
-%>
-<html>
-<body>
-    <h1>You are logged out!</h1>
-    <a href="login.jsp">Login again</a>
-</body>
-</html>
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data  # Features
+y = iris.target  # Labels
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create the k-NN classifier with k=3
+knn = KNeighborsClassifier(n_neighbors=3)
+
+# Train the model
+knn.fit(X_train, y_train)
+
+# Make predictions
+predictions = knn.predict(X_test)
+
+# Print predictions
+print("Predicted Labels:", predictions)
+print("Actual Labels:", y_test)
+
+# Calculate and display accuracy
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy * 100:.2f}%")
