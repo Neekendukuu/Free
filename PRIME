@@ -1,29 +1,33 @@
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
+#include <Adafruit_SSD1306.h>
+#include <DHT.h>
 
-# Load the Iris dataset
-iris = load_iris()
-X = iris.data  # Features
-y = iris.target  # Labels
+Adafruit_SSD1306 display(128, 64, &Wire);
+DHT Sensor(3, DHT22);
 
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+void setup() {
+  Serial.begin(9600);                    
+  Sensor.begin();                         
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); 
+  display.setTextColor(WHITE);           
+}
 
-# Create the k-NN classifier with k=3
-knn = KNeighborsClassifier(n_neighbors=3)
+void loop() {
+  float temp = Sensor.readTemperature(); 
+  float hum = Sensor.readHumidity();    
 
-# Train the model
-knn.fit(X_train, y_train)
 
-# Make predictions
-predictions = knn.predict(X_test)
+  display.clearDisplay();
+  display.setCursor(0, 10);
+  display.setTextSize(1);
+  display.print("Temp: ");
+  display.println(temp);
+  display.print("Hum: ");
+  display.println(hum);
+  display.display();
 
-# Print predictions
-print("Predicted Labels:", predictions)
-print("Actual Labels:", y_test)
+  delay(500); // Wait for 500 ms
+}
 
-# Calculate and display accuracy
-accuracy = accuracy_score(y_test, predictions)
-print(f"Accuracy: {accuracy * 100:.2f}%")
+https://wokwi.com/projects/415726692027164673
+
+
